@@ -323,11 +323,10 @@ void* Par_tree_search(void* rank) {
             pthread_rwlock_unlock(&rwlock);
 #           ifdef DEBUG
             Print_tour(my_rank, curr_tour, "Best tour");
-#           endif {
+#           endif 
             pthread_rwlock_wrlock(&rwlock);
             Update_best_tour(curr_tour);
             pthread_rwlock_unlock(&rwlock);
-            }
       } else {
          pthread_rwlock_unlock(&rwlock);
          for (nbr = n-1; nbr >= 1; nbr--) 
