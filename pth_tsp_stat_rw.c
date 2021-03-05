@@ -327,9 +327,10 @@ void* Par_tree_search(void* rank) {
             pthread_rwlock_wrlock(&rwlock);
             Update_best_tour(curr_tour);
             pthread_rwlock_unlock(&rwlock);
+         } else {
+            /* This is when Best_tour returns false and the read lock needs to unlock. Otherwise the read lock unlocks inside the if statement*/
+            pthread_rwlock_unlock(&rwlock);
          }
-      } else {
-         pthread_rwlock_unlock(&rwlock);
          for (nbr = n-1; nbr >= 1; nbr--) 
             if (Feasible(curr_tour, nbr)) {
                Add_city(curr_tour, nbr);
