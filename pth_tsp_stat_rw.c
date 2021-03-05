@@ -320,6 +320,7 @@ void* Par_tree_search(void* rank) {
       if (City_count(curr_tour) == n) {
          pthread_rwlock_rdlock(&rwlock);
          if (Best_tour(curr_tour)) {
+            /*This unlock is somewhat redundant to line 333 but neccesary to prevent deadlock */ 
             pthread_rwlock_unlock(&rwlock);
 #           ifdef DEBUG
             Print_tour(my_rank, curr_tour, "Best tour");
@@ -331,6 +332,7 @@ void* Par_tree_search(void* rank) {
             /* This is when Best_tour returns false and the read lock needs to unlock. Otherwise the read lock unlocks inside the if statement*/
             pthread_rwlock_unlock(&rwlock);
          }
+      } else {
          for (nbr = n-1; nbr >= 1; nbr--) 
             if (Feasible(curr_tour, nbr)) {
                Add_city(curr_tour, nbr);
