@@ -139,6 +139,7 @@ void Free_queue(my_queue_t queue);
 void Print_queue(my_queue_t queue, long my_rank, char title[]);
 int Get_upper_bd_queue_sz(void);
 long long Fact(int k);
+pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER;
 
 /* Barrier */
 my_barrier_t My_barrier_init(int thr_count);
@@ -170,8 +171,7 @@ int main(int argc, char* argv[]) {
 #  endif   
 
    thread_handles = malloc(thread_count*sizeof(pthread_t));
-   bar_str = My_barrier_init(thread_count);
-   pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER;
+   bar_str = My_barrier_init(thread_count);   
    pthread_rwlock_init(&rwlock, NULL);
 
    best_tour = Alloc_tour(NULL);
