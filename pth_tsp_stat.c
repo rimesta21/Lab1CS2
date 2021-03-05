@@ -171,6 +171,7 @@ int main(int argc, char* argv[]) {
 
    thread_handles = malloc(thread_count*sizeof(pthread_t));
    bar_str = My_barrier_init(thread_count);
+   pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER;
    pthread_rwlock_init(&rwlock, NULL);
 
    best_tour = Alloc_tour(NULL);
