@@ -7,12 +7,14 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static void *thread_func(void* tn)
 {
-    int i;
+    int i, temp;
 
-    for (i = 0; i < 100000; i++)     
-        pthread_mutex_lock(&mutex);
-        counter++;
-        pthread_mutex_unlock(&mutex);
+    for (i = 0; i < 100000; i++) 
+        temp++;
+
+    pthread_mutex_lock(&mutex);
+    counter += temp;
+    pthread_mutex_unlock(&mutex);
 
     return NULL;
 
