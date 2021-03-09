@@ -7,7 +7,8 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static void *thread_func(void* tn)
 {
-    int i, temp;
+    int i;
+    int temp = 0;
 
     for (i = 0; i < 100000; i++) 
         temp++;
